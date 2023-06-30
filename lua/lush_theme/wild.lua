@@ -2,11 +2,12 @@
 -- VSCode Theme Color Reference: https://code.visualstudio.com/api/references/theme-color#command-center-colors
 
 local lush = require('lush')
+local hsl = lush.hsl
 
 local norm_fg = '#D4D4D4'
 local norm_bg = '#1E1E1E'
 
-local blue = '#569CD6'
+local blue = hsl(233, 41, 66)
 local blue2 = '#4fc1ff'
 local light_blue = '#9CDCFE'
 local bright_blue = '#2aaaff'
@@ -14,10 +15,11 @@ local green = '#6A9955'
 local blue_green = '#4EC9B0'
 local light_green = '#B5CEA8'
 local light_red = '#D16969'
-local orange = '#CE9178'
-local yellow_orange = '#D7BA7D'
-local yellow = '#DCDCAA'
-local pink = '#C586C0'
+local orange = hsl(17, 76, 64)
+local yellow_orange =	hsl(41, 64, 74)
+local yellow = hsl(55, 63, 70)
+local pink =  hsl(254, 59, 79)
+local purple = hsl(305, 35, 65)
 
 local white = '#ffffff'
 local gray = '#51504f'
@@ -31,7 +33,7 @@ local error_red = '#F14C4C'
 local warn_yellow = '#CCA700'
 local info_blue = '#3794ff'
 local hint_gray = '#B0B0B0'
-local ok_green = '#89d185' -- color for success, so I use notebookStatusSuccessIcon.foreground
+local ok_green = hsl(117, 54, 59) -- color for success, so I use notebookStatusSuccessIcon.foreground
 
 local selection_blue = '#04395e'
 local folded_blue = '#202d39' -- editor.foldBackground
@@ -154,25 +156,25 @@ local theme = lush(function(injected_functions)
     --
     Comment { fg = green, gui = 'italic' },
 
-    Constant { fg = blue },
+    Constant { fg = pink },
     String { fg = orange },
-    Character { Constant },
+    Character { fg = yellow_orange },
     Number { fg = light_green },
-    Boolean { Constant },
+    Boolean { fg = purple },
     Float { Number },
 
     Identifier { fg = light_blue },
     Function { fg = yellow },
 
-    Statement { fg = pink },
+    Keyword { fg = blue },
+    Statement { Keyword },
     Conditional { Statement },
     Repeat { Statement },
-    Label { Statement },
+    Label { fg = pink },
     Operator { fg = norm_fg },
-    Keyword { fg = blue },
     Exception { Statement },
 
-    PreProc { fg = pink },
+    PreProc { Keyword },
     Include { PreProc },
     Define { PreProc },
     Macro { PreProc },
@@ -180,7 +182,7 @@ local theme = lush(function(injected_functions)
 
     Type { fg = blue },
     StorageClass { Type },
-    Structure { Type },
+    Structure { fg = hsl(169, 47, 52) },
     Typedef { Type },
 
     Special { fg = yellow_orange },
@@ -310,7 +312,7 @@ local theme = lush(function(injected_functions)
     sym("@variable.builtin") { fg = blue },
     -- sym("@constant") { },
     sym("@constant.builtin") { Constant },
-    sym("@constant.macro") { Constant },
+    sym("@constant.macro") { PreProc },
     sym("@namespace") { fg = blue_green },
     -- sym("@symbol") { },
 
