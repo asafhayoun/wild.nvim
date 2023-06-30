@@ -16,6 +16,7 @@ local blue_green = '#4EC9B0'
 local light_green = '#B5CEA8'
 local light_red = '#D16969'
 local orange = hsl(17, 76, 64)
+local light_orange = hsl(20, 88, 75)
 local yellow_orange =	hsl(41, 64, 74)
 local yellow = hsl(55, 63, 70)
 local pink =  hsl(254, 59, 79)
@@ -55,7 +56,8 @@ local theme = lush(function(injected_functions)
     SelectionHighlightBackground { bg = '#333a40' },
     LightBulb { fg = '#ffcc00' },
     CodeLens { fg = '#999999' },
-    GutterGitModified { fg = '#1b81a8' },
+    -- GutterGitModified { fg = '#1b81a8' },
+    GutterGitModified { fg = light_orange },
     -- GutterGitAdded { fg = '#487e02' },
     GutterGitAdded { fg = ok_green },
     GutterGitDeleted { fg = '#f14c4c' },
@@ -99,6 +101,9 @@ local theme = lush(function(injected_functions)
     -- lCursor { },
     -- CursorIM { },
     Directory { fg = light_green },
+    NvimTreeModifiedFile { GutterGitModified },
+
+    
     DiffAdd { DiffLineAdded },
     DiffDelete { DiffLineDeleted },
     DiffChange { DiffLineChanged },
@@ -480,6 +485,10 @@ local theme = lush(function(injected_functions)
     --
     -- Gitsigns
     --
+    NvimTreeGitNew { GutterGitAdded },
+    NvimTreeGitDeleted { GutterGitDeleted },
+    NvimTreeGitDirty { GutterGitModified },
+    NvimTreeGitStaged { bg = hsl(160, 20, 30) },
     GitSignsAdd { GutterGitAdded },
     GitSignsChange { GutterGitModified },
     GitSignsDelete { GutterGitDeleted },
