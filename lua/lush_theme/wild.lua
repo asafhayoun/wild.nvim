@@ -33,7 +33,7 @@ local error_red = '#F14C4C'
 local warn_yellow = '#CCA700'
 local info_blue = '#3794ff'
 local hint_gray = '#B0B0B0'
-local ok_green = hsl(117, 54, 59) -- color for success, so I use notebookStatusSuccessIcon.foreground
+local ok_green = hsl(96, 85, 45) -- color for success, so I use notebookStatusSuccessIcon.foreground
 
 local selection_blue = '#04395e'
 local folded_blue = '#202d39' -- editor.foldBackground
@@ -56,7 +56,8 @@ local theme = lush(function(injected_functions)
     LightBulb { fg = '#ffcc00' },
     CodeLens { fg = '#999999' },
     GutterGitModified { fg = '#1b81a8' },
-    GutterGitAdded { fg = '#487e02' },
+    -- GutterGitAdded { fg = '#487e02' },
+    GutterGitAdded { fg = ok_green },
     GutterGitDeleted { fg = '#f14c4c' },
     Breadcrumb { fg = '#a9a9a9', bg = norm_bg },
     ScrollbarSlider { bg = '#424242' },
@@ -97,7 +98,7 @@ local theme = lush(function(injected_functions)
     Cursor { fg = gray, bg = '#aeafad' },
     -- lCursor { },
     -- CursorIM { },
-    Directory { fg = blue },
+    Directory { fg = light_green },
     DiffAdd { DiffLineAdded },
     DiffDelete { DiffLineDeleted },
     DiffChange { DiffLineChanged },
@@ -182,7 +183,7 @@ local theme = lush(function(injected_functions)
 
     Type { fg = blue },
     StorageClass { Type },
-    Structure { fg = hsl(169, 47, 52) },
+    Structure { fg = hsl(174, 50, 56) },
     Typedef { Type },
 
     Special { fg = yellow_orange },
