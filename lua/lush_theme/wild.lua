@@ -186,9 +186,9 @@ local theme = lush(function(injected_functions)
     Macro { PreProc },
     PreCondit { PreProc },
 
-    Type { fg = blue },
-    StorageClass { Type },
+    StorageClass { fg = blue },
     Structure { fg = hsl(174, 50, 56) },
+    Type { Structure },
     Typedef { Type },
 
     Special { fg = yellow_orange },
