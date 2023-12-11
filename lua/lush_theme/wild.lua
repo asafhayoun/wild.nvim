@@ -183,7 +183,7 @@ local theme = lush(function(injected_functions)
     PreProc { Keyword },
     Include { PreProc },
     Define { PreProc },
-    Macro { PreProc },
+    Macro { fg = pink, bg = hsl(218, 32, 19)},
     PreCondit { PreProc },
 
     Type { fg = blue },
