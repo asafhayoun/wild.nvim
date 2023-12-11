@@ -375,7 +375,8 @@ local theme = lush(function(injected_functions)
     -- sym("@lsp.type.event") { },  -- TODO: what is event property?
     sym("@lsp.type.function") { fg = yellow },
     sym("@lsp.type.method") { fg = yellow },
-    sym("@lsp.type.macro") { fg = blue },
+    -- sym("@lsp.type.macro") { fg = blue },
+    sym("@lsp.type.macro") { Macro },
     sym("@lsp.type.keyword") { fg = blue },
     sym("@lsp.type.modifier") { fg = blue },
     sym("@lsp.type.comment") { fg = green },
