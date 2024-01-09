@@ -491,6 +491,14 @@ local theme = lush(function(injected_functions)
 		NvimTreeGitDeleted({ GutterGitDeleted }),
 		NvimTreeGitDirty({ GutterGitModified }),
 		NvimTreeGitStaged({ bg = hsl(160, 20, 30) }),
+
+		NeoTreeGitAdded({ GutterGitAdded }),
+		NeoTreeGitDeleted({ GutterGitDeleted }),
+		NeoTreeGitModified({ GutterGitModified }),
+		NeoTreeGitStaged({ NvimTreeGitStaged }),
+		NeoTreeGitUnstaged({ bg = hsl(30, 20, 30) }),
+		NeoTreeGitUntracked({ fg = GutterGitAdded.fg, bg = hsl(90, 20, 30) }),
+
 		GitSignsAdd({ GutterGitAdded }),
 		GitSignsChange({ GutterGitModified }),
 		GitSignsDelete({ GutterGitDeleted }),
