@@ -37,7 +37,7 @@ local warn_yellow = "#CCA700"
 local info_blue = "#3794ff"
 local hint_gray = "#B0B0B0"
 -- local ok_green = hsl(96, 85, 45) -- color for success, so I use notebookStatusSuccessIcon.foreground
-local ok_green = hsl(165, 64, 46) -- color for success, so I use notebookStatusSuccessIcon.foreground
+local ok_green = hsl(165, 70, 46) -- color for success, so I use notebookStatusSuccessIcon.foreground
 
 local selection_blue = "#04395e"
 local folded_blue = "#202d39" -- editor.foldBackground
