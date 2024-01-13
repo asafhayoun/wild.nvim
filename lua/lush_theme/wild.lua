@@ -4,6 +4,9 @@
 local lush = require("lush")
 local hsl = lush.hsl
 
+---@type WildThemeOptions
+local options = require("./config").options
+
 -- local norm_fg = "#D4D4D4"
 local norm_fg = "#ccdddd"
 -- local norm_bg = "#1E1E1E"
@@ -492,6 +495,8 @@ local theme = lush(function(injected_functions)
 		NvimTreeGitDeleted { GutterGitDeleted },
 		NvimTreeGitDirty { GutterGitModified },
 		NvimTreeGitStaged { bg = hsl(160, 20, 30) },
+		NvimTreeNormal { bg = options.transparent.tree[1] and "transparent" or norm_bg },
+		NvimTreeNormalNC { bg = options.transparent.tree[2] and "transparent" or norm_bg },
 
 		NeoTreeGitAdded { GutterGitAdded },
 		NeoTreeGitDeleted { GutterGitDeleted },
@@ -499,6 +504,8 @@ local theme = lush(function(injected_functions)
 		NeoTreeGitStaged { NvimTreeGitStaged },
 		NeoTreeGitUnstaged { bg = hsl(30, 20, 30) },
 		NeoTreeGitUntracked { fg = GutterGitAdded.fg, bg = hsl(90, 20, 30) },
+		NeoTreeNormal { NvimTreeNormal },
+		NeoTreeNormalNC { NvimTreeNormalNC },
 
 		GitSignsAdd { GutterGitAdded },
 		GitSignsChange { GutterGitModified },
