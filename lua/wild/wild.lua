@@ -100,7 +100,7 @@ local theme = lush(function(injected_functions)
 		--
 		-- Editor
 		--
-		CursorLine { bg = options.transparent.code[1] and "NONE" or black3 },
+		CursorLine { bg = config._is_code(options.transparent.normal) and "NONE" or black3 },
 		CursorColumn { bg = black3 },
 		ColorColumn { bg = black2 }, -- #5a5a5a in VSCode (editorRuler.foreground) it's too bright
 		Conceal { fg = gray2 },
