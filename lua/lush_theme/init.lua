@@ -1,3 +1,3 @@
 return {
-	setup = require("./config").setup,
+	setup = require("config").setup,
 }
