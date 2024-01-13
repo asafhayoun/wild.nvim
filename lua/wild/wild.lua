@@ -4,8 +4,9 @@
 local lush = require("lush")
 local hsl = lush.hsl
 
+local config = require("wild/config")
 ---@type WildThemeOptions
-local options = require("wild/config").options
+local options = config.options
 
 -- local norm_fg = "#D4D4D4"
 local norm_fg = "#ccdddd"
@@ -99,7 +100,7 @@ local theme = lush(function(injected_functions)
 		--
 		-- Editor
 		--
-		CursorLine { bg = black3 },
+		CursorLine { bg = options.transparent.code[1] and "NONE" or black3 },
 		CursorColumn { bg = black3 },
 		ColorColumn { bg = black2 }, -- #5a5a5a in VSCode (editorRuler.foreground) it's too bright
 		Conceal { fg = gray2 },
@@ -133,8 +134,8 @@ local theme = lush(function(injected_functions)
 		-- MsgSeparator { },
 		MoreMsg { fg = norm_fg },
 		NonText { fg = gray2 },
-		Normal { fg = norm_fg, bg = norm_bg },
-		-- NormalNC { },
+		Normal { fg = norm_fg, bg = config._is_code(options.transparent.normal) and "NONE" or norm_bg },
+		NormalNC { bg = config._is_code(options.transparent.blurred) and "NONE" or norm_bg },
 		Pmenu { fg = norm_fg, bg = black2 },
 		PmenuSel { fg = white, bg = selection_blue },
 		PmenuSbar { bg = black2 },
@@ -495,8 +496,8 @@ local theme = lush(function(injected_functions)
 		NvimTreeGitDeleted { GutterGitDeleted },
 		NvimTreeGitDirty { GutterGitModified },
 		NvimTreeGitStaged { bg = hsl(160, 20, 30) },
-		NvimTreeNormal { bg = options.transparent.tree[1] and "NONE" or norm_bg },
-		NvimTreeNormalNC { bg = options.transparent.tree[2] and "NONE" or norm_bg },
+		NvimTreeNormal { bg = config._is_tree(options.transparent.normal) and "NONE" or norm_bg },
+		NvimTreeNormalNC { bg = config._is_tree(options.transparent.blurred) and "NONE" or norm_bg },
 
 		NeoTreeGitAdded { GutterGitAdded },
 		NeoTreeGitDeleted { GutterGitDeleted },
