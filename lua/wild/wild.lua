@@ -495,8 +495,8 @@ local theme = lush(function(injected_functions)
 		NvimTreeGitDeleted { GutterGitDeleted },
 		NvimTreeGitDirty { GutterGitModified },
 		NvimTreeGitStaged { bg = hsl(160, 20, 30) },
-		NvimTreeNormal { bg = options.transparent.tree[1] and "transparent" or norm_bg },
-		NvimTreeNormalNC { bg = options.transparent.tree[2] and "transparent" or norm_bg },
+		NvimTreeNormal { bg = options.transparent.tree[1] and "NONE" or norm_bg },
+		NvimTreeNormalNC { bg = options.transparent.tree[2] and "NONE" or norm_bg },
 
 		NeoTreeGitAdded { GutterGitAdded },
 		NeoTreeGitDeleted { GutterGitDeleted },
