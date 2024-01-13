@@ -5,7 +5,7 @@ local lush = require("lush")
 local hsl = lush.hsl
 
 ---@type WildThemeOptions
-local options = require("config").options
+local options = require("wild/config").options
 
 -- local norm_fg = "#D4D4D4"
 local norm_fg = "#ccdddd"
