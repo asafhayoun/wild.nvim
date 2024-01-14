@@ -1,1 +1,1 @@
-require("wild.config")._load()
+require("wild.init")._load()
