@@ -7,7 +7,7 @@ local M = {}
 
 ---@type WildThemeOptions
 local defaults = {
-	transparent = { normal = "none", blurred = "all" },
+	transparent = { normal = "none", blurred = "none" },
 }
 
 ---@param t Transparency

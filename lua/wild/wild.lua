@@ -4,14 +4,14 @@
 local lush = require("lush")
 local hsl = lush.hsl
 
-local config = require("wild/config")
+local config = require("wild.config")
 ---@type WildThemeOptions
 local options = config.options
 
 -- local norm_fg = "#D4D4D4"
 local norm_fg = "#ccdddd"
--- local norm_bg = "#1E1E1E"
-local norm_bg = "#112222"
+-- local norm_bg_solid = "#1E1E1E"
+local norm_bg_solid = "#112222"
 
 local blue = hsl(233, 41, 66)
 local blue2 = "#4fc1ff"
@@ -49,6 +49,12 @@ local float_border_fg = "#454545"
 local indent_guide_fg = "#404040"
 local indent_guide_context_fg = "#707070"
 local label_fg = "#c8c8c8"
+
+local norm_bg = config._is_code(options.transparent.normal) and "NONE" or norm_bg_solid
+local norm_nc_bg = config._is_code(options.transparent.blurred) and "NONE" or norm_bg_solid
+local tree_bg = config._is_tree(options.transparent.normal) and "NONE" or norm_bg_solid
+local tree_nc_bg = config._is_tree(options.transparent.blurred) and "NONE" or norm_bg_solid
+local cursor_line = config._is_code(options.transparent.normal) and "NONE" or black3
 
 ---@diagnostic disable
 local theme = lush(function(injected_functions)
@@ -100,7 +106,7 @@ local theme = lush(function(injected_functions)
 		--
 		-- Editor
 		--
-		CursorLine { bg = config._is_code(options.transparent.normal) and "NONE" or black3 },
+		CursorLine { bg = cursor_line },
 		CursorColumn { bg = black3 },
 		ColorColumn { bg = black2 }, -- #5a5a5a in VSCode (editorRuler.foreground) it's too bright
 		Conceal { fg = gray2 },
@@ -134,8 +140,8 @@ local theme = lush(function(injected_functions)
 		-- MsgSeparator { },
 		MoreMsg { fg = norm_fg },
 		NonText { fg = gray2 },
-		Normal { fg = norm_fg, bg = config._is_code(options.transparent.normal) and "NONE" or norm_bg },
-		NormalNC { bg = config._is_code(options.transparent.blurred) and "NONE" or norm_bg },
+		Normal { fg = norm_fg, bg = norm_bg },
+		NormalNC { bg = norm_nc_bg },
 		Pmenu { fg = norm_fg, bg = black2 },
 		PmenuSel { fg = white, bg = selection_blue },
 		PmenuSbar { bg = black2 },
@@ -218,6 +224,11 @@ local theme = lush(function(injected_functions)
 		LspCodeLens { CodeLens },
 		-- LspCodeLensSeparator { }, -- Used to color the seperator between two or more code lens.
 		LspSignatureActiveParameter { MatchedCharacters },
+
+		--
+		-- Notify
+		--
+		NotifyBackground { bg = norm_bg_solid },
 
 		--
 		-- Diagnostics
@@ -496,8 +507,8 @@ local theme = lush(function(injected_functions)
 		NvimTreeGitDeleted { GutterGitDeleted },
 		NvimTreeGitDirty { GutterGitModified },
 		NvimTreeGitStaged { bg = hsl(160, 20, 30) },
-		NvimTreeNormal { bg = config._is_tree(options.transparent.normal) and "NONE" or norm_bg },
-		NvimTreeNormalNC { bg = config._is_tree(options.transparent.blurred) and "NONE" or norm_bg },
+		NvimTreeNormal { bg = tree_bg },
+		NvimTreeNormalNC { bg = tree_nc_bg },
 
 		NeoTreeGitAdded { GutterGitAdded },
 		NeoTreeGitDeleted { GutterGitDeleted },
