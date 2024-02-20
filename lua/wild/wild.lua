@@ -506,7 +506,8 @@ local theme = lush(function(injected_functions)
 		NvimTreeGitNew { GutterGitAdded },
 		NvimTreeGitDeleted { GutterGitDeleted },
 		NvimTreeGitDirty { GutterGitModified },
-		NvimTreeGitStaged { bg = hsl(160, 20, 30) },
+		NvimTreeGitStaged { fg = hsl(160, 60, 50), gui = "bold" },
+		NvimTreeGitUnstaged { fg = hsl(0, 60, 50), gui = "bold" },
 		NvimTreeNormal { bg = tree_bg },
 		NvimTreeNormalNC { bg = tree_nc_bg },
 
@@ -514,8 +515,9 @@ local theme = lush(function(injected_functions)
 		NeoTreeGitDeleted { GutterGitDeleted },
 		NeoTreeGitModified { GutterGitModified },
 		NeoTreeGitStaged { NvimTreeGitStaged },
-		NeoTreeGitUnstaged { bg = hsl(30, 20, 30) },
-		NeoTreeGitUntracked { fg = GutterGitAdded.fg, bg = hsl(90, 20, 30) },
+		NeoTreeGitUnstaged { NvimTreeGitUnstaged },
+		-- NeoTreeGitUntracked { fg = GutterGitAdded.fg, bg = hsl(90, 20, 30) },
+		NeoTreeGitUntracked { GutterGitAdded },
 		NeoTreeNormal { NvimTreeNormal },
 		NeoTreeNormalNC { NvimTreeNormalNC },
 
