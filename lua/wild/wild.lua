@@ -11,16 +11,16 @@ local options = config.options
 -- local norm_fg = "#D4D4D4"
 local norm_fg = "#ccdddd"
 -- local norm_bg_solid = "#1E1E1E"
-local norm_bg_solid = "#112222"
+local norm_bg_solid = hsl("#222228")
 
 local blue = hsl(233, 41, 66)
-local blue2 = "#4fc1ff"
-local light_blue = "#9CDCFE"
-local bright_blue = "#2aaaff"
-local green = "#6A9955"
-local blue_green = "#4EC9B0"
-local light_green = "#B5CEA8"
-local light_red = "#D16969"
+local blue2 = hsl("#4fc1ff")
+local light_blue = hsl("#9CDCFE")
+local bright_blue = hsl("#2aaaff")
+local green = hsl("#6A9955")
+local blue_green = hsl("#4EC9B0")
+local light_green = hsl(99, 28, 73)
+local light_red = hsl("#D16969")
 local orange = hsl(17, 76, 64)
 local light_orange = hsl(20, 88, 75)
 local yellow_orange = hsl(41, 64, 74)
@@ -39,9 +39,9 @@ local black3 = "#2a2d2e" -- CursorLine (list.hoverBackground from VSCode)
 local error_red = "#F14C4C"
 local warn_yellow = "#CCA700"
 local info_blue = "#3794ff"
-local hint_gray = "#B0B0B0"
+local hint_gray = hsl(0, 0, 72)
 -- local ok_green = hsl(96, 85, 45) -- color for success, so I use notebookStatusSuccessIcon.foreground
-local ok_green = hsl(165, 70, 46) -- color for success, so I use notebookStatusSuccessIcon.foreground
+local ok_green = hsl(165, 70, 46)
 
 local selection_blue = "#04395e"
 local folded_blue = "#202d39" -- editor.foldBackground
@@ -49,6 +49,8 @@ local float_border_fg = "#454545"
 local indent_guide_fg = "#404040"
 local indent_guide_context_fg = "#707070"
 local label_fg = "#c8c8c8"
+
+local tab_effect = "#aaaaaa"
 
 local norm_bg = config._is_code(options.transparent.normal) and "NONE" or norm_bg_solid
 local norm_nc_bg = config._is_code(options.transparent.blurred) and "NONE" or norm_bg_solid
@@ -68,7 +70,7 @@ local theme = lush(function(injected_functions)
 		FloatBorder { fg = float_border_fg },
 		SelectionHighlightBackground { bg = "#333a40" },
 		LightBulb { fg = "#ffcc00" },
-		CodeLens { fg = "#999999" },
+		CodeLens { fg = hint_gray },
 		-- GutterGitModified { fg = '#1b81a8' },
 		GutterGitModified { fg = light_orange },
 		-- GutterGitAdded { fg = '#487e02' },
@@ -142,7 +144,7 @@ local theme = lush(function(injected_functions)
 		NonText { fg = gray2 },
 		Normal { fg = norm_fg, bg = norm_bg },
 		NormalNC { bg = norm_nc_bg },
-		Pmenu { fg = norm_fg, bg = black2 },
+		Pmenu { fg = norm_fg, bg = "#28282e" },
 		PmenuSel { fg = white, bg = selection_blue },
 		PmenuSbar { bg = black2 },
 		PmenuThumb { bg = "#474747" },
@@ -236,12 +238,12 @@ local theme = lush(function(injected_functions)
 		DiagnosticError { fg = error_red },
 		DiagnosticWarn { fg = warn_yellow },
 		DiagnosticInfo { fg = info_blue },
-		DiagnosticHint { fg = hint_gray },
+		DiagnosticHint { fg = hsl(250, 40, 77) },
 		DiagnosticOk { fg = ok_green },
 		DiagnosticVirtualTextError { DiagnosticError, bg = "#332323" },
 		DiagnosticVirtualTextWarn { DiagnosticWarn, bg = "#2f2c1b" },
 		DiagnosticVirtualTextInfo { DiagnosticInfo, bg = "#212a35" },
-		DiagnosticVirtualTextHint { DiagnosticHint, bg = black },
+		DiagnosticVirtualTextHint { DiagnosticHint, bg = hsl(250, 9, 20) },
 		DiagnosticVirtualTextOk { DiagnosticOk, bg = "#233323" },
 		DiagnosticUnderlineError { gui = "undercurl", sp = error_red },
 		DiagnosticUnderlineWarn { gui = "undercurl", sp = warn_yellow },
@@ -261,6 +263,10 @@ local theme = lush(function(injected_functions)
 		DiagnosticUnnecessary { UnnecessaryCode, gui = "underdashed" },
 		DiagnosticDeprecated { fg = gray3, gui = "strikethrough" },
 
+		TreesitterContext { Pmenu },
+		TreesitterContextLineNumber { LineNr, bg = TreesitterContext.bg },
+		TreesitterContextBottom { gui = "underline", sp = black },
+
 		--
 		-- Treesitter
 		--
@@ -277,7 +283,7 @@ local theme = lush(function(injected_functions)
 		-- sym("@none") { },
 		-- sym("@preproc") { },
 		-- sym("@define") { },
-		sym("@operator") { fg = norm_fg },
+		sym("@operator") { fg = hsl(24, 92, 84) },
 
 		-- Punctuation
 		sym("@punctuation.delimiter") { fg = norm_fg },
@@ -300,7 +306,7 @@ local theme = lush(function(injected_functions)
 		-- sym("@function") { },
 		sym("@function.builtin") { Function },
 		sym("@function.call") { Function },
-		sym("@function.macro") { Function },
+		sym("@function.macro") { fg = Macro.fg },
 		-- sym("@method") { },
 		-- sym("@method.call") { },
 		sym("@constructor") { fg = blue_green },
@@ -326,17 +332,17 @@ local theme = lush(function(injected_functions)
 		sym("@type.definition") { fg = blue_green },
 		sym("@type.qualifier") { fg = blue },
 		sym("@storageclass") { fg = blue },
-		sym("@attribute") { fg = blue_green },
+		sym("@attribute") { fg = Macro.fg },
 		sym("@field") { fg = light_blue },
 		sym("@property") { sym("@field") },
 
 		-- Identifiers
 		sym("@variable") { fg = light_blue },
 		sym("@variable.builtin") { fg = blue },
-		-- sym("@constant") { },
+		sym("@constant") { Constant },
 		sym("@constant.builtin") { Constant },
 		sym("@constant.macro") { PreProc },
-		sym("@namespace") { fg = blue_green },
+		sym("@namespace") { fg = light_green },
 		-- sym("@symbol") { },
 
 		-- Text (Mainly for markup languages)
@@ -378,7 +384,7 @@ local theme = lush(function(injected_functions)
 		-- The help page :h lsp-semantic-highlight
 		-- A short guide: https://gist.github.com/swarn/fb37d9eefe1bc616c2a7e476c0bc0316
 		-- Token types and modifiers are described here: https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide
-		sym("@lsp.type.namespace") { fg = blue_green },
+		sym("@lsp.type.namespace") { sym("@namespace") },
 		sym("@lsp.type.type") { fg = blue_green },
 		sym("@lsp.type.class") { fg = blue_green },
 		sym("@lsp.type.enum") { fg = blue_green },
@@ -389,9 +395,9 @@ local theme = lush(function(injected_functions)
 		sym("@lsp.type.variable") { fg = light_blue },
 		sym("@lsp.type.property") { fg = light_blue },
 		sym("@lsp.type.enumMember") { fg = blue2 },
-		-- sym("@lsp.type.event") { },  -- TODO: what is event property?
+		sym("@lsp.type.event") { fg = light_red },
 		sym("@lsp.type.function") { fg = yellow },
-		sym("@lsp.type.method") { fg = yellow },
+		sym("@lsp.type.method") { fg = yellow_orange },
 		-- sym("@lsp.type.macro") { fg = blue },
 		sym("@lsp.type.macro") { Macro },
 		sym("@lsp.type.keyword") { fg = blue },
@@ -400,14 +406,19 @@ local theme = lush(function(injected_functions)
 		sym("@lsp.type.string") { fg = orange },
 		sym("@lsp.type.number") { fg = light_green },
 		sym("@lsp.type.regexp") { fg = light_red },
-		sym("@lsp.type.operator") { fg = norm_fg },
-		sym("@lsp.type.decorator") { fg = yellow },
+		sym("@lsp.type.operator") { sym("@operator") },
+		sym("@lsp.type.decorator") { sym("@attribute") },
+		sym("rustDerive") { sym("@attribute") },
+		sym("rustDeriveTrait") { sym("@function.macro") },
+		sym("@lsp.type.deriveHelper") { Macro },
+		sym("@lsp.type.derive") { fg = light_green, bg = hsl(139, 16, 15) },
+		sym("@lsp.mod.constant") { Constant },
 		sym("@lsp.typemod.type.defaultLibrary") { fg = blue_green },
 		sym("@lsp.typemod.class.defaultLibrary") { fg = blue_green },
 		sym("@lsp.typemod.variable.defaultLibrary") { sym("@variable.builtin") },
 		sym("@lsp.typemod.function.defaultLibrary") { sym("@function.builtin") },
 		sym("@lsp.typemod.method.defaultLibrary") { sym("@function.builtin") },
-		sym("@lsp.typemod.macro.defaultLibrary") { sym("@function.macro") },
+		sym("@lsp.typemod.macro.defaultLibrary") { fg = yellow_orange, bg = hsl(1, 16, 17) },
 		sym("@lsp.typemod.variable.readonly") { fg = blue2 },
 		sym("@lsp.typemod.property.readonly") { fg = blue2 },
 		-- Set injected highlights. Mainly for Rust doc comments and also works for
@@ -534,6 +545,80 @@ local theme = lush(function(injected_functions)
 		GitSignsChangeInline { DiffTextChanged },
 		GitSignsDeleteInline { DiffTextDeleted },
 
+		--
+		-- Bufferline
+		--
+		BufferLineTab { fg = norm_fg, bg = norm_bg_solid },
+		-- BufferLineTabInactive { BufferLineTab },
+		BufferLineTabSeparator { fg = BufferLineTab.bg, bg = NormalFloat.bg },
+		BufferLineSeparator { bg = BufferLineTab.bg, fg = NormalFloat.bg },
+		BufferLineTabSelected { gui = "underline", sp = tab_effect, fg = light_blue, bg = hsl("#443344") },
+		BufferLineOffsetSeparator { fg = BufferLineTab.bg },
+		BufferLinePickVisible { fg = error_red, gui = "bold" },
+		BufferLinePickSelected { BufferLineTabSelected, fg = error_red },
+		BufferLineIndicator { BufferLineTab },
+		BufferLineIndicatorVisible { BufferLineIndicator },
+		BufferLineIndicatorSelected { BufferLineTabSelected },
+		BufferLineTabSeparatorSelected {
+			bg = BufferLineTabSelected.bg,
+			fg = NormalFloat.bg,
+			BufferLineTabSelected,
+		},
+		BufferLineSeparatorVisible { fg = NormalFloat.bg, bg = BufferLineTab.bg },
+		BufferLineSeparatorSelected { BufferLineTabSeparatorSelected },
+		BufferLineDuplicate { BufferLineTab },
+		BufferLineDuplicateVisible { BufferLineTab },
+		BufferLineDuplicateSelected { BufferLineTabSelected },
+		BufferLineModified { BufferLineTab, fg = yellow_orange.lighten(20) },
+		BufferLineModifiedVisible { BufferLineModified },
+		BufferLineModifiedSelected { BufferLineTabSelected, fg = BufferLineModified.fg },
+		BufferLineFill { bg = BufferLineSeparator.fg },
+		BufferLineDiagnostic { BufferLineTab },
+		BufferLineDiagnosticVisible { BufferLineDiagnostic },
+		BufferLineDiagnosticSelected { BufferLineTabSelected },
+		BufferLineErrorDiagnostic { BufferLineTab, fg = error_red },
+		BufferLineErrorDiagnosticVisible { BufferLineErrorDiagnostic },
+		BufferLineErrorDiagnosticSelected { BufferLineTabSelected, fg = error_red },
+		BufferLineError { BufferLineTab, fg = error_red },
+		BufferLineErrorVisible { BufferLineError },
+		BufferLineErrorSelected { BufferLineTabSelected, fg = error_red },
+		BufferLineWarningDiagnostic { BufferLineTab, fg = warn_yellow },
+		BufferLineWarningDiagnosticVisible { BufferLineWarningDiagnostic },
+		BufferLineWarningDiagnosticSelected { BufferLineTabSelected, fg = warn_yellow },
+		BufferLineWarning { BufferLineTab, fg = warn_yellow },
+		BufferLineWarningVisible { BufferLineWarning },
+		BufferLineWarningSelected { BufferLineTabSelected, fg = warn_yellow },
+		BufferLineInfoDiagnostic { BufferLineTab, fg = blue2 },
+		BufferLineInfoDiagnosticVisible { BufferLineInfoDiagnostic },
+		BufferLineInfoDiagnosticSelected { BufferLineTabSelected, fg = blue2 },
+		BufferLineInfo { BufferLineTab, fg = blue2 },
+		BufferLineInfoVisible { BufferLineInfo },
+		BufferLineInfoSelected { BufferLineTabSelected, fg = blue2 },
+		BufferLineHintDiagnostic { BufferLineTab, fg = hint_gray },
+		BufferLineHintDiagnosticVisible { BufferLineHintDiagnostic },
+		BufferLineHintDiagnosticSelected { BufferLineTabSelected, fg = hint_gray },
+		BufferLineHint { BufferLineTab },
+		BufferLineHintVisible { BufferLineHint },
+		BufferLineHintSelected { BufferLineTabSelected, fg = BufferLineTab.fg },
+		BufferLineNumbers { BufferLineTab, fg = yellow },
+		BufferLineNumbersVisible { BufferLineNumbers },
+		BufferLineNumbersSelected { BufferLineTabSelected, fg = yellow },
+		BufferLineBuffer { BufferLineTab },
+		BufferLineBufferVisible { BufferLineBuffer },
+		BufferLineBufferSelected { BufferLineTabSelected },
+		BufferLineTabClose { BufferLineTab, fg = light_red },
+		BufferLineCloseButton { BufferLineTabClose },
+		BufferLineCloseButtonVisible { BufferLineCloseButton },
+		BufferLineCloseButtonSelected { BufferLineTabSelected, fg = BufferLineTabClose.fg },
+		BufferLineGroupLabel { bg = hsl("#c060e0") },
+		BufferLineGroupSeparator { BufferLineTabSeparator },
+		BufferLineTruncMarker { gui = "bold", fg = blue2 },
+		BufferLineBackground { BufferLineTab },
+		BufferLinePick {},
+		-- BufferLineDevIconRs {},
+		BufferLineDevIconMdSelected { BufferLineTabSelected },
+		BufferLineDevIconLua { fg = blue.darken(10) },
+		BufferLineDevIconLuaSelected { fg = BufferLineDevIconLua.fg, BufferLineTabSelected },
 		--
 		-- vim-illuminate
 		--

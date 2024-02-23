@@ -1,5 +1,6 @@
+local config = require("wild.config")
 local M = {
-	setup = require("wild.config").setup,
+	setup = config.setup,
 }
 
 vim.api.nvim_create_user_command("WildThemeSettings", function()
@@ -53,7 +54,48 @@ function M._load()
 	package.loaded["wild.wild"] = nil
 
 	-- include our theme file and pass it to lush to apply
-	require("lush")(require("wild.wild"))
+	local colors = require("wild.wild")
+	require("lush")(colors)
+	-- print(colors)
+	local wild_group = vim.api.nvim_create_augroup("WildTheme", { clear = true })
+	vim.api.nvim_create_autocmd({ "ColorScheme", "BufEnter" }, {
+		group = wild_group,
+		pattern = "*",
+		callback = function()
+			local success, icons = pcall(require, "nvim-web-devicons")
+			if not success then
+				return
+			end
+			local filename = vim.fn.expand("%:t")
+			local ext = vim.fn.expand("%:e")
+			local _, icon_name = icons.get_icon(filename, ext, { default = true })
+			if not icon_name then
+				return
+			end
+			local icon_color = config.options.icon_overrides[icon_name]
+			if icon_color == nil then
+				_, icon_color = icons.get_icon_color(filename, ext, { default = true })
+			else
+				icon_color = icon_color.color
+			end
+			local selected = vim.api.nvim_get_hl(0, { name = "BufferLineTabSelected" })
+			local normal = vim.api.nvim_get_hl(0, { name = "BufferLineTab" })
+			vim.api.nvim_set_hl(0, "BufferLine" .. icon_name .. "Selected", {
+				bg = selected.bg,
+				fg = icon_color,
+				sp = selected.sp,
+				underline = true,
+			})
+			vim.api.nvim_set_hl(0, "BufferLine" .. icon_name, {
+				bg = normal.bg,
+				fg = icon_color,
+			})
+			vim.api.nvim_set_hl(0, "BufferLine" .. icon_name .. "Inactive", {
+				bg = normal.bg,
+				fg = icon_color,
+			})
+		end,
+	})
 end
 
 return M

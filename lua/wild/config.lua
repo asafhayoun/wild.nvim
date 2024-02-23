@@ -4,10 +4,14 @@ local M = {}
 
 ---@class WildThemeOptions
 ---@field transparent {normal: Transparency, blurred: Transparency}
+---@field icon_overrides table<string, {color?: string}>
 
 ---@type WildThemeOptions
 local defaults = {
 	transparent = { normal = "none", blurred = "none" },
+	icon_overrides = {
+		DevIconLicense = { color = "#80a040" },
+	},
 }
 
 ---@param t Transparency
