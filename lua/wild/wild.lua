@@ -28,17 +28,17 @@ local yellow = hsl(55, 63, 70)
 local pink = hsl(254, 59, 79)
 local purple = hsl(305, 35, 65)
 
-local white = "#ffffff"
-local gray = "#51504f"
-local gray2 = "#858585"
-local gray3 = "#808080"
-local black = "#2d2d2d" -- TabLine
-local black2 = "#252526" -- Statusline, TabLineFill, Pmenu
-local black3 = "#2a2d2e" -- CursorLine (list.hoverBackground from VSCode)
+local white = hsl("#ffffff")
+local gray = hsl("#51504f")
+local gray2 = hsl("#858585")
+local gray3 = hsl("#808080")
+local black = hsl("#2d2d2d") -- TabLine
+local black2 = hsl("#252526") -- Statusline, TabLineFill, Pmenu
+local black3 = hsl("#2a2d2e") -- CursorLine (list.hoverBackground from VSCode)
 
-local error_red = "#F14C4C"
-local warn_yellow = "#CCA700"
-local info_blue = "#3794ff"
+local error_red = hsl("#F14C4C")
+local warn_yellow = hsl("#CCA700")
+local info_blue = hsl("#3794ff")
 local hint_gray = hsl(0, 0, 72)
 -- local ok_green = hsl(96, 85, 45) -- color for success, so I use notebookStatusSuccessIcon.foreground
 local ok_green = hsl(165, 70, 46)
@@ -92,7 +92,10 @@ local theme = lush(function(injected_functions)
 		DashboardDesc { fg = light_blue, bg = menu_items, sp = hsl(201, 88, 62), gui = "underline" },
 		DashboardHeader { fg = blue_green },
 		DashboardIcon { fg = yellow_orange },
-		DashboardKey { fg = blue, bg = black, sp = hsl("#eeee44"), gui = "bold, underline" },
+		DashboardKey {
+			fg = blue,
+			-- bg = black, sp = hsl("#eeee44"), gui = "bold, underline"
+		},
 		DashboardFooter { fg = ok_green },
 		-- For the unused code, use Identifier's fg (9cdcfe) as the base color,
 		-- editorUnnecessaryCode.opacity is 000000aa (the alpha value is aa),
@@ -180,7 +183,7 @@ local theme = lush(function(injected_functions)
 		--
 		-- Syntax
 		--
-		Comment { fg = green, gui = "italic" },
+		Comment { fg = hsl("#7fc07f") },
 
 		Constant { fg = pink },
 		String { fg = orange },
@@ -232,6 +235,7 @@ local theme = lush(function(injected_functions)
 		LspCodeLens { CodeLens },
 		-- LspCodeLensSeparator { }, -- Used to color the seperator between two or more code lens.
 		LspSignatureActiveParameter { MatchedCharacters },
+		LspInlayHint { fg = hsl("#8f8f8f") },
 
 		--
 		-- Notify
@@ -289,7 +293,7 @@ local theme = lush(function(injected_functions)
 		-- sym("@none") { },
 		-- sym("@preproc") { },
 		-- sym("@define") { },
-		sym("@operator") { fg = hsl(24, 92, 84) },
+		sym("@operator") { Operator },
 
 		-- Punctuation
 		sym("@punctuation.delimiter") { fg = norm_fg },
@@ -322,7 +326,7 @@ local theme = lush(function(injected_functions)
 		sym("@keyword") { Keyword },
 		sym("@keyword.coroutine") { fg = pink },
 		sym("@keyword.function") { fg = blue },
-		sym("@keyword.operator") { fg = norm_fg },
+		sym("@keyword.operator") { fg = hsl(24, 92, 84) },
 		sym("@keyword.return") { fg = pink },
 		-- sym("@conditional") { },
 		-- sym("@conditional.ternary") { },
@@ -408,10 +412,10 @@ local theme = lush(function(injected_functions)
 		sym("@lsp.type.macro") { Macro },
 		sym("@lsp.type.keyword") { fg = blue },
 		sym("@lsp.type.modifier") { fg = blue },
-		sym("@lsp.type.comment") { fg = green },
-		sym("@lsp.type.string") { fg = orange },
-		sym("@lsp.type.number") { fg = light_green },
-		sym("@lsp.type.regexp") { fg = light_red },
+		sym("@lsp.type.comment") { Comment },
+		sym("@lsp.type.string") { String },
+		sym("@lsp.type.number") { Number },
+		sym("@lsp.type.regexp") { sym("@string.regex") },
 		sym("@lsp.type.operator") { sym("@operator") },
 		sym("@lsp.type.decorator") { sym("@attribute") },
 		sym("rustDerive") { sym("@attribute") },
