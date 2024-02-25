@@ -72,8 +72,9 @@ function M._load()
 			if not icon_name then
 				return
 			end
-			local icon_color = config.options.icon_overrides[icon_name]
-			if icon_color == nil then
+			local icon = config.options.icon_overrides[icon_name]
+			local icon_color
+			if icon == nil then
 				_, icon_color = icons.get_icon_color(filename, ext, { default = true })
 			else
 				icon_color = icon_color.color
