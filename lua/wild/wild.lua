@@ -57,6 +57,7 @@ local norm_nc_bg = config._is_code(options.transparent.blurred) and "NONE" or no
 local tree_bg = config._is_tree(options.transparent.normal) and "NONE" or norm_bg_solid
 local tree_nc_bg = config._is_tree(options.transparent.blurred) and "NONE" or norm_bg_solid
 local cursor_line = config._is_code(options.transparent.normal) and "NONE" or black3
+local menu_items = config._is_code(options.transparent.normal) and "NONE" or hsl("#3f3868")
 
 ---@diagnostic disable
 local theme = lush(function(injected_functions)
@@ -88,6 +89,11 @@ local theme = lush(function(injected_functions)
 		ProgressBar { fg = "#0e70c0" }, -- progressBar.background
 		MatchedCharacters { fg = bright_blue }, -- editorSuggestWidget.highlightForeground
 		Hint { MatchedCharacters }, -- for the hint letter in options, e.g., the q in [q]uickfix
+		DashboardDesc { fg = light_blue, bg = menu_items, gui = "undercurl" },
+		DashboardHeader { fg = blue_green },
+		DashboardIcon { fg = yellow_orange },
+		DashboardKey { fg = blue, bg = black, sp = hsl("#44ff44"), gui = "bold, underline" },
+		DashboardFooter { fg = ok_green },
 		-- For the unused code, use Identifier's fg (9cdcfe) as the base color,
 		-- editorUnnecessaryCode.opacity is 000000aa (the alpha value is aa),
 		-- so the color will be 9cdcfeaa. Converting hexa to hex gets 729db4.
