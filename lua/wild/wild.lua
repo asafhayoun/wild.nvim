@@ -200,7 +200,7 @@ local theme = lush(function(injected_functions)
 		Conditional { Statement },
 		Repeat { Statement },
 		Label { fg = pink },
-		Operator { fg = norm_fg },
+		Operator { fg = hsl(24, 92, 84) },
 		Exception { Statement },
 
 		PreProc { Keyword },
@@ -326,7 +326,7 @@ local theme = lush(function(injected_functions)
 		sym("@keyword") { Keyword },
 		sym("@keyword.coroutine") { fg = pink },
 		sym("@keyword.function") { fg = blue },
-		sym("@keyword.operator") { fg = hsl(24, 92, 84) },
+		sym("@keyword.operator") { Operator },
 		sym("@keyword.return") { fg = pink },
 		-- sym("@conditional") { },
 		-- sym("@conditional.ternary") { },
@@ -629,6 +629,38 @@ local theme = lush(function(injected_functions)
 		BufferLineDevIconMdSelected { BufferLineTabSelected },
 		BufferLineDevIconLua { fg = blue.darken(10) },
 		BufferLineDevIconLuaSelected { fg = BufferLineDevIconLua.fg, BufferLineTabSelected },
+
+		--
+		-- Navic
+		--
+		NavicIconsFile { String, gui = "underline" },
+		NavicIconsModule { sym("@namespace") },
+		NavicIconsNamespace { sym("@namespace") },
+		NavicIconsPackage { fg = light_red },
+		NavicIconsClass { Structure },
+		NavicIconsMethod { sym("@lsp.type.method") },
+		NavicIconsProperty { sym("@property") },
+		NavicIconsField { sym("@field") },
+		NavicIconsConstructor { sym("@constructor") },
+		NavicIconsEnum { sym("@lsp.type.enum") },
+		NavicIconsInterface { sym("@lsp.type.interface") },
+		NavicIconsFunction { Function },
+		NavicIconsVariable { fg = hsl("#4488ff") },
+		NavicIconsConstant { Constant },
+		NavicIconsString { String },
+		NavicIconsNumber { Number },
+		NavicIconsBoolean { Boolean },
+		NavicIconsArray { fg = blue2 },
+		NavicIconsObject { fg = white, gui = "bold" },
+		NavicIconsKey { sym("@attribute") },
+		NavicIconsNull { Constant },
+		NavicIconsEnumMember { sym("@lsp.type.enumMember") },
+		NavicIconsStruct { Structure },
+		NavicIconsEvent { sym("@lsp.type.event") },
+		NavicIconsOperator { Operator },
+		NavicIconsTypeParameter { sym("@lsp.type.typeParameter") },
+		NavicText { fg = hsl("#c8c8b8") },
+		NavicSeparator { fg = light_blue },
 		--
 		-- vim-illuminate
 		--
