@@ -378,6 +378,7 @@ local theme = lush(function(injected_functions)
 
 		-- Tags
 		sym("@tag") { fg = blue },
+		sym("@tag.tsx") { Type },
 		sym("@tag.attribute") { fg = light_blue },
 		sym("@tag.delimiter") { fg = gray3 },
 
