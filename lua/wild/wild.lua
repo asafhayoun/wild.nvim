@@ -9,7 +9,7 @@ local config = require("wild.config")
 local options = config.options
 
 -- local norm_fg = "#D4D4D4"
-local norm_fg = "#ccdddd"
+local norm_fg = hsl("#c7d8d8")
 -- local norm_bg_solid = "#1E1E1E"
 local norm_bg_solid = hsl("#222228")
 
@@ -28,7 +28,7 @@ local yellow = hsl(55, 63, 70)
 local pink = hsl(254, 59, 79)
 local purple = hsl(305, 35, 65)
 
-local white = hsl("#ffffff")
+local white = hsl("#f8f8f2")
 local gray = hsl("#51504f")
 local gray2 = hsl("#858585")
 local gray3 = hsl("#808080")
