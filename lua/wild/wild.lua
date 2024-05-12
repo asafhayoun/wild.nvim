@@ -206,7 +206,7 @@ local theme = lush(function(injected_functions)
 		Repeat { Statement },
 		Label { fg = pink },
 		-- Operator { fg = hsl(24, 92, 84) },
-		Operator { fg = white },
+		Operator { fg = norm_fg },
 		Exception { Statement },
 
 		PreProc { Keyword },
