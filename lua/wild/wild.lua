@@ -552,6 +552,8 @@ local theme = lush(function(injected_functions)
 		NeoTreeGitUnstaged { NvimTreeGitUnstaged },
 		-- NeoTreeGitUntracked { fg = GutterGitAdded.fg, bg = hsl(90, 20, 30) },
 		NeoTreeGitUntracked { fg = hsl(68, 44, 51) },
+		NeoTreeGitIgnored { fg = "#9f9f9f" },
+		NeoTreeDotfile { fg = "#bbbbbb" },
 		NeoTreeNormal { NvimTreeNormal },
 		NeoTreeNormalNC { NvimTreeNormalNC },
 		NeoTreeCursorLine { NvimTreeCursorLine },
