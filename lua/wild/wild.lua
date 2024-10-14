@@ -433,6 +433,7 @@ local theme = lush(function(injected_functions)
 		sym("rustDeriveTrait") { sym("@function.macro") },
 		sym("@lsp.type.deriveHelper") { Macro },
 		sym("@lsp.type.derive") { fg = light_green, bg = hsl(139, 16, 15) },
+		sym("@lsp.type.formatSpecifier") { fg = blue2 },
 		sym("@lsp.mod.constant") { Constant },
 		sym("@lsp.typemod.type.defaultLibrary") { fg = blue_green },
 		sym("@lsp.typemod.class.defaultLibrary") { fg = blue_green },
