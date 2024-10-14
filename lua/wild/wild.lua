@@ -56,7 +56,7 @@ local norm_bg = config._is_code(options.transparent.normal) and transparent or n
 local norm_nc_bg = config._is_code(options.transparent.blurred) and transparent or norm_bg_solid
 local tree_bg = config._is_tree(options.transparent.normal) and transparent or norm_bg_solid
 local tree_nc_bg = config._is_tree(options.transparent.blurred) and transparent or norm_bg_solid
-local tree_line = config._is_tree(options.transparent.blurred) and transparent or black3
+local tree_line = config._is_tree(options.transparent.blurred) and "NONE" or black3
 local cursor_line = config._is_code(options.transparent.normal) and transparent or black3
 local menu_items = config._is_code(options.transparent.normal) and transparent or hsl("#3f3868")
 
@@ -781,5 +781,7 @@ local theme = lush(function(injected_functions)
 	}
 end)
 ---@diagnostic enable
-
+if config.options.transparent.float then
+	theme.NormalFloat = { bg = transparent }
+end
 return theme
