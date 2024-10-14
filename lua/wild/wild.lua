@@ -340,6 +340,7 @@ local theme = lush(function(injected_functions)
 		-- sym("@repeat") { },
 		-- sym("@debug") { },
 		sym("@label") { fg = label_fg },
+		sym("@label.rust") { fg = light_orange },
 		-- sym("@include") { },
 		-- sym("@exception") { },
 
@@ -426,6 +427,8 @@ local theme = lush(function(injected_functions)
 		sym("@lsp.type.regexp") { sym("@string.regex") },
 		sym("@lsp.type.operator") { sym("@operator") },
 		sym("@lsp.type.decorator") { sym("@attribute") },
+		sym("@lsp.type.lifetime") { sym("@label") },
+		sym("@lsp.type.lifetime.rust") { sym("@label.rust") },
 		sym("rustDerive") { sym("@attribute") },
 		sym("rustDeriveTrait") { sym("@function.macro") },
 		sym("@lsp.type.deriveHelper") { Macro },
