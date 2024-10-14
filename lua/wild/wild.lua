@@ -51,13 +51,14 @@ local indent_guide_context_fg = "#707070"
 local label_fg = "#c8c8c8"
 
 local tab_effect = "#aaaaaa"
-
-local norm_bg = config._is_code(options.transparent.normal) and "NONE" or norm_bg_solid
-local norm_nc_bg = config._is_code(options.transparent.blurred) and "NONE" or norm_bg_solid
-local tree_bg = config._is_tree(options.transparent.normal) and "NONE" or norm_bg_solid
-local tree_nc_bg = config._is_tree(options.transparent.blurred) and "NONE" or norm_bg_solid
-local cursor_line = config._is_code(options.transparent.normal) and "NONE" or black3
-local menu_items = config._is_code(options.transparent.normal) and "NONE" or hsl("#3f3868")
+local transparent = options.transparent.color
+local norm_bg = config._is_code(options.transparent.normal) and transparent or norm_bg_solid
+local norm_nc_bg = config._is_code(options.transparent.blurred) and transparent or norm_bg_solid
+local tree_bg = config._is_tree(options.transparent.normal) and transparent or norm_bg_solid
+local tree_nc_bg = config._is_tree(options.transparent.blurred) and transparent or norm_bg_solid
+local tree_line = config._is_tree(options.transparent.blurred) and transparent or black3
+local cursor_line = config._is_code(options.transparent.normal) and transparent or black3
+local menu_items = config._is_code(options.transparent.normal) and transparent or hsl("#3f3868")
 
 ---@diagnostic disable
 local theme = lush(function(injected_functions)
@@ -538,6 +539,7 @@ local theme = lush(function(injected_functions)
 		NvimTreeGitUnstaged { fg = hsl(0, 60, 50), gui = "bold" },
 		NvimTreeNormal { bg = tree_bg },
 		NvimTreeNormalNC { bg = tree_nc_bg },
+		NvimTreeCursorLine { bg = tree_line, gui = "bold" },
 
 		NeoTreeGitAdded { GutterGitAdded },
 		NeoTreeGitDeleted { GutterGitDeleted },
@@ -548,6 +550,7 @@ local theme = lush(function(injected_functions)
 		NeoTreeGitUntracked { fg = hsl(68, 44, 51) },
 		NeoTreeNormal { NvimTreeNormal },
 		NeoTreeNormalNC { NvimTreeNormalNC },
+		NeoTreeCursorLine { NvimTreeCursorLine },
 
 		GitSignsAdd { GutterGitAdded },
 		GitSignsChange { GutterGitModified },

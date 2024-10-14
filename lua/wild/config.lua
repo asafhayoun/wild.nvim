@@ -1,14 +1,14 @@
 local M = {}
 
----@alias Transparency "none" | "code" | "all"
+---@alias Transparency "none" | "tree" | "code" | "all"
 
 ---@class WildThemeOptions
----@field transparent {normal: Transparency, blurred: Transparency}
+---@field transparent {normal: Transparency, blurred: Transparency, color: string}
 ---@field icon_overrides table<string, {color?: string}>
 
 ---@type WildThemeOptions
 local defaults = {
-	transparent = { normal = "none", blurred = "none" },
+	transparent = { normal = "none", blurred = "none", color = "NONE" },
 	icon_overrides = {
 		DevIconLicense = { color = "#80a040" },
 	},
@@ -20,7 +20,7 @@ function M._is_code(t)
 end
 ---@param t Transparency
 function M._is_tree(t)
-	return t == "all"
+	return t == "tree" or t == "all"
 end
 
 ---@param options WildThemeOptions | nil
