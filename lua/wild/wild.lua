@@ -326,14 +326,14 @@ local theme = lush(function(injected_functions)
 		sym("@function.macro") { fg = Macro.fg },
 		-- sym("@method") { },
 		-- sym("@method.call") { },
-		sym("@constructor") { fg = blue_green },
+		sym("@constructor") { Keyword },
 		sym("@parameter") { fg = light_blue },
 
 		-- Keyword
 		sym("@keyword") { Keyword },
 		sym("@keyword.coroutine") { fg = pink },
 		sym("@keyword.function") { fg = blue },
-		sym("@keyword.operator") { Operator },
+		sym("@keyword.operator") { Keyword, gui = "bold" },
 		sym("@keyword.return") { fg = pink },
 		-- sym("@conditional") { },
 		-- sym("@conditional.ternary") { },
