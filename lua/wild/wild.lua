@@ -43,8 +43,7 @@ local hint_gray = hsl(0, 0, 72)
 -- local ok_green = hsl(96, 85, 45) -- color for success, so I use notebookStatusSuccessIcon.foreground
 local ok_green = hsl(165, 70, 46)
 
-local selection_blue = hsl("#093b5f")
--- local selection_blue = "#04395e"
+local selection_blue = "#04395e"
 local folded_blue = "#202d39" -- editor.foldBackground
 local float_border_fg = "#454545"
 local indent_guide_fg = "#404040"
@@ -156,7 +155,7 @@ local theme = lush(function(injected_functions)
 		Normal { fg = norm_fg, bg = norm_bg },
 		NormalNC { bg = norm_nc_bg },
 		Pmenu { fg = norm_fg, bg = "#28282e" },
-		PmenuSel { bg = selection_blue },
+		PmenuSel { bg = hsl("#093b5f") },
 		PmenuSbar { bg = black2 },
 		PmenuThumb { bg = "#474747" },
 		NormalFloat { Pmenu },
