@@ -425,7 +425,7 @@ local theme = lush(function(injected_functions)
 		sym("@lsp.type.string") { String },
 		sym("@lsp.type.number") { Number },
 		sym("@lsp.type.regexp") { sym("@string.regex") },
-		sym("@lsp.type.operator") { sym("@operator") },
+		sym("@lsp.type.operator") {},
 		sym("@lsp.type.decorator") { sym("@attribute") },
 		sym("@lsp.type.lifetime") { sym("@label") },
 		sym("@lsp.type.lifetime.rust") { sym("@label.rust") },
