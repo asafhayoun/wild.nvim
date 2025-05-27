@@ -43,7 +43,8 @@ local hint_gray = hsl(0, 0, 72)
 -- local ok_green = hsl(96, 85, 45) -- color for success, so I use notebookStatusSuccessIcon.foreground
 local ok_green = hsl(165, 70, 46)
 
-local selection_blue = "#04395e"
+local selection_blue = hsl("#093b5f")
+-- local selection_blue = "#04395e"
 local folded_blue = "#202d39" -- editor.foldBackground
 local float_border_fg = "#454545"
 local indent_guide_fg = "#404040"
@@ -155,7 +156,7 @@ local theme = lush(function(injected_functions)
 		Normal { fg = norm_fg, bg = norm_bg },
 		NormalNC { bg = norm_nc_bg },
 		Pmenu { fg = norm_fg, bg = "#28282e" },
-		PmenuSel { fg = white, bg = selection_blue },
+		PmenuSel { bg = selection_blue },
 		PmenuSbar { bg = black2 },
 		PmenuThumb { bg = "#474747" },
 		NormalFloat { Pmenu },
@@ -647,6 +648,35 @@ local theme = lush(function(injected_functions)
 		BufferLineDevIconLuaSelected { fg = BufferLineDevIconLua.fg, BufferLineTabSelected },
 
 		--
+		-- blink.cmp
+		--
+		BlinkCmpKindText { fg = hsl("#b4b6ca") },
+		BlinkCmpKindMethod { sym("@lsp.type.method") },
+		BlinkCmpKindFunction { fg = purple },
+		BlinkCmpKindConstructor { sym("@constructor") },
+		BlinkCmpKindField { fg = hsl("#66eecc") },
+		BlinkCmpKindVariable { fg = hsl("#4488ff") },
+		BlinkCmpKindClass { Structure },
+		BlinkCmpKindInterface { fg = yellow_orange },
+		BlinkCmpKindModule { sym("@namespace") },
+		BlinkCmpKindProperty { sym("@property") },
+		BlinkCmpKindUnit { BlinkCmpKindText },
+		BlinkCmpKindValue { fg = blue2 },
+		BlinkCmpKindEnum { sym("@lsp.type.enum") },
+		BlinkCmpKindKeyword { Keyword },
+		BlinkCmpKindSnippet { fg = hsl("#efbfef") },
+		BlinkCmpKindColor { fg = pink },
+		BlinkCmpKindFile { String },
+		BlinkCmpKindReference { fg = light_red },
+		BlinkCmpKindFolder { fg = light_green },
+		BlinkCmpKindEnumMember { sym("@lsp.type.enumMember") },
+		BlinkCmpKindConstant { Constant },
+		BlinkCmpKindStruct { Structure },
+		BlinkCmpKindEvent { sym("@lsp.type.event") },
+		BlinkCmpKindOperator { fg = purple },
+		BlinkCmpKindTypeParameter { sym("@lsp.type.typeParameter") },
+
+		--
 		-- Navic
 		--
 		NavicIconsFile { String, gui = "underline" },
@@ -660,7 +690,7 @@ local theme = lush(function(injected_functions)
 		NavicIconsConstructor { sym("@constructor") },
 		NavicIconsEnum { sym("@lsp.type.enum") },
 		NavicIconsInterface { sym("@lsp.type.interface") },
-		NavicIconsFunction { Function },
+		NavicIconsFunction { fg = purple },
 		NavicIconsVariable { fg = hsl("#4488ff") },
 		NavicIconsConstant { Constant },
 		NavicIconsString { String },
@@ -673,7 +703,7 @@ local theme = lush(function(injected_functions)
 		NavicIconsEnumMember { sym("@lsp.type.enumMember") },
 		NavicIconsStruct { Structure },
 		NavicIconsEvent { sym("@lsp.type.event") },
-		NavicIconsOperator { Operator },
+		NavicIconsOperator { fg = purple },
 		NavicIconsTypeParameter { sym("@lsp.type.typeParameter") },
 		NavicText { fg = hsl("#c8c8b8") },
 		NavicSeparator { fg = light_blue },
